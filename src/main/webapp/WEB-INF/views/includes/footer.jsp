@@ -29,6 +29,10 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
+        $(".sidebar-navs")
+        	.attr("class", "sidebar-nav navbar-collapse collapse")
+        	.attr("aria-expanded", 'false')
+        	.attr("style", "height:1px");
     });
     </script>
 
