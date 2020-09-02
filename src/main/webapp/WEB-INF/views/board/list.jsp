@@ -70,7 +70,7 @@
                             		
                             		<c:if test="${pageMaker.next}">
                             			<li class="paginate_button next">
-                            				<a href="${pageMake.endPage + 1 }">Next</a>
+                            				<a href="${pageMaker.endPage + 1 }">Next</a>
                             			</li>
                             		</c:if>
                             	</ul>
