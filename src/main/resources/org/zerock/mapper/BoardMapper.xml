@@ -56,5 +56,10 @@
 		where rn > (#{pageNum} -1) * #{amount}
 		]]>
 	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		selet count(*) from tbl_board where bno > 0
+	</select>
+	
 
 </mapper>
