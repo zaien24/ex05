@@ -88,8 +88,8 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
-		rttr.addFlashAttribute("pageNum", cri.getPageNum());
-		rttr.addFlashAttribute("amount", cri.getAmount());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
 		
 		return "redirect:/board/list";
 		
