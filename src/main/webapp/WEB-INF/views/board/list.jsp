@@ -116,6 +116,8 @@
 	$(document).ready(function() {
 		var result = "<c:out value='${result}' />";
 		
+		console.log(result);
+		
 		checkModal(result);
 		
 		

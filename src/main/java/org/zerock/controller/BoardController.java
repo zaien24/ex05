@@ -64,6 +64,8 @@ public class BoardController {
 		
 		service.register(board);
 		
+		// 디버그 찍어도 rttr 안에는 아무것도 안나옴
+		// javscript에서 콘솔 찍으면 나옴
 		rttr.addFlashAttribute("result", board.getBno());
 		
 		return "redirect:/board/list";
