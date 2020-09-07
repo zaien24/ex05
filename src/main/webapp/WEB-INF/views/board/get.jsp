@@ -79,6 +79,12 @@
 
 <script type="text/javascript">
 $(function() {
+	console.log(replyService);
+});
+</script>
+
+<script type="text/javascript">
+$(function() {
 	
 	var operForm = $("#operForm");
 	
