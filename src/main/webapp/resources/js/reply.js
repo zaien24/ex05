@@ -2,7 +2,12 @@ console.log("Reply Module......");
 
 var replyService = (function() {
 	
-	return {name:"AAAA"};
+	function add(reply, callback) {
+		console.log("add reply............");
+		
+	}
+	
+	return {add:add};
 })();
 
 
