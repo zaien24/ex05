@@ -28,6 +28,8 @@ var replyService = (function() {
 
         var bno = param.bno;
 
+		console.log(bno);
+
         var page = param.pag || 1;
 
         $.getJSON("/replies/pages/" + bno + "/" + page + ".json", 
@@ -62,11 +64,9 @@ var replyService = (function() {
 	
 	function update(reply, callback, error) {
 		
-		console.log("RNO:" + reply.rno);
-		
 		$.ajax({
 			type : 'put',
-			url : 'replies/' + reply.rno,
+			url : '/replies/' + reply.rno,
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
@@ -126,9 +126,9 @@ var replyService = (function() {
 	return {
         add : add,
         getList : getList,
-		remove : remove,
-		update : update,
-		get : get,
-		displayTime : displayTime
+			remove : remove,
+			update : update,
+			get : get,
+			displayTime : displayTime
     };
 })();
