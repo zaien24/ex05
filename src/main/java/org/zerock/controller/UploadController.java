@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
@@ -96,10 +98,22 @@ public class UploadController {
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
 			
 			//File saveFile = new File(uploadFolder, uploadFileName);
-			File saveFile = new File(uploadPath, uploadFileName);
+			
 			
 			try {
+				File saveFile = new File(uploadPath, uploadFileName);
 				multipartFile.transferTo(saveFile);
+				// check image type file
+				if (checkImageType(saveFile)) {
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+					
+					//Thumbnailator는
+					// InputStream과 java.io.File 객체를 이용해서 파일을 생성할 수 있고,
+					// 뒤에 사이즈에 대한 부분을 파라미터로 width와 height를 지정할 수 있다. 
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+					
+					thumbnail.close();
+				}
 			} catch (Exception e) {
 				log.error(e.getMessage());
 			}
@@ -116,7 +130,10 @@ public class UploadController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
 
+	
 	
 }
