@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import java.io.File;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +23,28 @@ public class UploadController {
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		
+		String uploadFolder = "C:\\upload";
+		
 		for (MultipartFile multipartFile : uploadFile) {
 			
 			log.info("---------------------------");
 			log.info("Upload file Name : " + multipartFile.getOriginalFilename());
 			log.info("Upload file Size : " + multipartFile.getSize());
+			
+			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+			
+			try {
+				multipartFile.transferTo(saveFile);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
 		}
+	}
+	
+	@GetMapping("/uploadAjax")
+	public void uploadAjax() {
+		
+		log.info("upload ajax");
 	}
 
 }
