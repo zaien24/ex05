@@ -10,8 +10,57 @@
 
 	<h1>Upload with Ajax</h1>
 	
+<style>
+.uploadResult {
+	width: 100%;
+	background-color: gray;
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img {
+	width: 100px;
+}
+</style>
+
+<style>
+.bigPictureWrapper {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top:0%;
+  width:100%;
+  height:100%;
+  background-color: gray; 
+  z-index: 100;
+}
+
+.bigPicture {
+  position: relative;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+	
 	<div class="uploadDiv">
 		<input type='file' name='uploadFile' multiple>
+	</div>
+	
+	<div class="uploadResult">
+		<ul>
+		</ul>
 	</div>
 
 <button id='uploadBtn'>Upload</button>
@@ -41,6 +90,9 @@ $(function() {
 		return true;	
 	}
 	
+	var cloneObj = $(".uploadDiv").clone();
+
+	
 	$("#uploadBtn").on('click', function(e) {
 		var formData = new FormData();
 		
@@ -66,12 +118,37 @@ $(function() {
 			contentType : false,
 			data : formData,
 			type : 'POST',
+			dataType : 'json',
 			success : function(result) {
-				alert("Uploaded");
+				
+				console.log(result);
+				
+				showUploadedFile(reulst);
+				
+				$(".uploadDiv").html(cloneObj.html());
 			}
 		});
 		
 	}); 
+	
+	
+	var uploadResult = $(".uploadResult ul");
+	
+	function showUploadedFile(uploadResultArr) {
+		var str = "";
+		
+		$(uploadResultArr).each(function(i, obj) {
+			
+			if (!obj.image) {
+				str +=
+			}
+			
+			str += "<li>" + obj.fileName + "</li>";
+		});
+		
+		uploadResult.append(str);
+	}
+	
 })
 
 </script>
