@@ -123,14 +123,13 @@ $(function() {
 				
 				console.log(result);
 				
-				showUploadedFile(reulst);
+				showUploadedFile(result);
 				
 				$(".uploadDiv").html(cloneObj.html());
 			}
 		});
 		
 	}); 
-	
 	
 	var uploadResult = $(".uploadResult ul");
 	
@@ -140,10 +139,13 @@ $(function() {
 		$(uploadResultArr).each(function(i, obj) {
 			
 			if (!obj.image) {
-				str +=
+				str += "<li><img src='/resources/img/attach.png'>" + obj.fileName+"</li>";
+			} else {
+				// str += "<li>" + obj.fileName + "</li>";
+				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid+"_" + obj.fileName);
+				str += "<li><img src='/display?fileName="+fileCallPath+"'><li>";
 			}
-			
-			str += "<li>" + obj.fileName + "</li>";
+
 		});
 		
 		uploadResult.append(str);
