@@ -10,6 +10,11 @@
 
 	<h1>Upload with Ajax</h1>
 	
+<div class='bigPictureWrapper'>
+	<div class='bigPicture'> 
+	</div>
+</div>
+
 <style>
 .uploadResult {
 	width: 100%;
@@ -73,8 +78,34 @@
 <script>
 
 function showImage(fileCallPath) {
-	alert(fileCallPath);
+	//alert(fileCallPath);
+	
+	$(".bigPictureWrapper").css("display", "flex").show();
+	
+	$(".bigPicture")
+	  .html("<img src='/display?fileName="+encodeURI(fileCallPath)+"'>")
+	  .animate({width:'100%', height: '100%'}, 1000);
 }
+
+
+$(".bigPictureWrapper").on("click", function(e) {
+	$(".bicPicture").animate({width: '0%', height: '0%'}, 1000);
+	setTimeout(() => {
+		$(this).hide();
+		}, 500
+	);
+})
+
+/* $(".bigPictureWrapper").on("click", function(e) {
+	$(".bicPicture").animate({width: '0%', height: '0%'}, 1000);
+	setTimeout(function() {
+		$('.bigPictureWrapper').hide();
+		}, 1000
+	);
+}) */
+
+
+
 
 $(function() {
 	
@@ -153,7 +184,13 @@ $(function() {
 			} else {
 				// str += "<li>" + obj.fileName + "</li>";
 				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid+"_" + obj.fileName);
-				str += "<li><img src='/display?fileName="+fileCallPath+"'><li>";
+				
+				var originPath = obj.uploadPath+ "\\" + obj.uuid + "_" + obj.fileName;
+				
+				originPath = originPath.replace(new RegExp(/\\/g), "/");
+				
+				//str += "<li><img src='/display?fileName="+fileCallPath+"'><li>";
+				str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'></a><li>";
 			}
 
 		});
