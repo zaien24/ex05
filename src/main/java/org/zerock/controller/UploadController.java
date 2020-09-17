@@ -174,6 +174,7 @@ public class UploadController {
 			HttpHeaders header = new HttpHeaders();
 			
 			header.add("Content-type", Files.probeContentType(file.toPath()));
+			System.out.println(Files.probeContentType(file.toPath()));
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 		} catch (IOException e) {
 			e.printStackTrace();
